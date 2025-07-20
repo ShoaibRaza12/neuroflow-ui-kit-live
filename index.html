@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Primary Meta Tags -->
+  <title>NeuroFlow UI Kit - Premium AI-Powered Dashboard Components</title>
+  <meta name="title" content="NeuroFlow UI Kit - Premium AI-Powered Dashboard Components" />
+  <meta name="description" content="A futuristic SaaS admin dashboard UI kit with glassmorphism, neumorphic design, and AI-powered components. Built with React, TypeScript, and Tailwind CSS." />
+  <meta name="keywords" content="UI Kit, Dashboard, React Components, Glassmorphism, Neumorphic, AI Dashboard, SaaS, Tailwind CSS, TypeScript, Premium UI" />
+  <meta name="author" content="NeuroFlow UI Kit" />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://neuroflow-ui-kit.demo/" />
+  <meta property="og:title" content="NeuroFlow UI Kit - Premium AI-Powered Dashboard Components" />
+  <meta property="og:description" content="Experience the future of dashboard design with glassmorphism effects, neon accents, and intelligent automation features." />
+  <meta property="og:image" content="https://neuroflow-ui-kit.demo/preview.png" />
+  <meta property="og:image:width" content="1280" />
+  <meta property="og:image:height" content="720" />
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://neuroflow-ui-kit.demo/" />
+  <meta property="twitter:title" content="NeuroFlow UI Kit - Premium AI-Powered Dashboard Components" />
+  <meta property="twitter:description" content="Experience the future of dashboard design with glassmorphism effects, neon accents, and intelligent automation features." />
+  <meta property="twitter:image" content="https://neuroflow-ui-kit.demo/preview.png" />
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.json" />
+  
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#00d4ff" />
+  <meta name="msapplication-TileColor" content="#0a0b1e" />
+  <meta name="color-scheme" content="dark" />
+  
+  <!-- Preconnect to Google Fonts for Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/styles/globals.css" />
+  
+  <!-- Preload Critical Resources -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  
+  <!-- Analytics (Ready for Implementation) -->
+  <!-- Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script> -->
+  
+  <!-- Custom CSS for Loading State -->
+  <style>
+    /* Loading Animation */
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0a0b1e 0%, #1a1b2e 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease-out;
+    }
+    
+    .loading-screen.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .neural-logo {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 2rem;
+      animation: pulse-glow 2s ease-in-out infinite alternate;
+    }
+    
+    .loading-text {
+      color: #e2e8f0;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    
+    .loading-subtitle {
+      color: #94a3b8;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 0.875rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .loading-bar {
+      width: 200px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .loading-bar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+      animation: loading-slide 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes pulse-glow {
+      from {
+        filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5));
+        transform: scale(1);
+      }
+      to {
+        filter: drop-shadow(0 0 40px rgba(168, 85, 247, 0.8));
+        transform: scale(1.05);
+      }
+    }
+    
+    @keyframes loading-slide {
+      0% {
+        left: -100%;
+      }
+      100% {
+        left: 100%;
+      }
+    }
+    
+    /* Error State */
+    .error-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0a0b1e 0%, #1a1b2e 100%);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    .error-title {
+      color: #ef4444;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    
+    .error-message {
+      color: #94a3b8;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      max-width: 500px;
+    }
+    
+    .retry-button {
+      background: linear-gradient(135deg, #00d4ff, #a855f7);
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 0.5rem;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    
+    .retry-button:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div id="loading-screen" class="loading-screen">
+    <svg class="neural-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="color: #00d4ff;"/>
+      <circle cx="12" cy="12" r="3" fill="currentColor" style="color: #a855f7;"/>
+    </svg>
+    <div class="loading-text">NeuroFlow UI Kit</div>
+    <div class="loading-subtitle">Loading AI-Powered Dashboard Components...</div>
+    <div class="loading-bar"></div>
+  </div>
+  
+  <!-- Error Screen -->
+  <div id="error-screen" class="error-screen">
+    <div class="error-title">Oops! Something went wrong</div>
+    <div class="error-message">
+      We encountered an issue loading the NeuroFlow UI Kit. Please check your internet connection and try again.
+    </div>
+    <button class="retry-button" onclick="location.reload()">
+      Retry Loading
+    </button>
+  </div>
+  
+  <!-- Main App Container -->
+  <div id="root"></div>
+  
+  <!-- Demo Information Banner (Optional) -->
+  <div id="demo-banner" style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 212, 255, 0.1);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 12px;
+    padding: 16px;
+    color: #e2e8f0;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.875rem;
+    max-width: 320px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+  ">
+    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #00d4ff;">
+        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+      </svg>
+      <span style="font-weight: 600; color: #00d4ff;">Live Demo</span>
+    </div>
+    <div style="color: #94a3b8; line-height: 1.4;">
+      This is an interactive demo of the NeuroFlow UI Kit. Explore all dashboard features and premium components.
+    </div>
+    <button onclick="this.parentElement.style.display='none'" style="
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: none;
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 18px;
+      padding: 4px;
+    ">&times;</button>
+  </div>
+  
+  <!-- Scripts -->
+  <script>
+    // Error Handling
+    window.addEventListener('error', function(e) {
+      console.error('Application Error:', e);
+      document.getElementById('loading-screen').style.display = 'none';
+      document.getElementById('error-screen').style.display = 'flex';
+    });
+    
+    // Loading Management
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        const loadingScreen = document.getElementById('loading-screen');
+        loadingScreen.classList.add('hidden');
+        
+        // Show demo banner after app loads
+        setTimeout(() => {
+          const demoBanner = document.getElementById('demo-banner');
+          demoBanner.style.opacity = '1';
+          demoBanner.style.transform = 'translateY(0)';
+          
+          // Auto-hide banner after 10 seconds
+          setTimeout(() => {
+            demoBanner.style.opacity = '0';
+            demoBanner.style.transform = 'translateY(20px)';
+          }, 10000);
+        }, 2000);
+        
+        setTimeout(() => {
+          loadingScreen.style.display = 'none';
+        }, 500);
+      }, 1500); // Show loading for minimum 1.5 seconds
+    });
+    
+    // Analytics (Ready for Implementation)
+    // window.dataLayer = window.dataLayer || [];
+    // function gtag(){dataLayer.push(arguments);}
+    // gtag('js', new Date());
+    // gtag('config', 'GA_MEASUREMENT_ID');
+    
+    // Demo Analytics
+    function trackDemoEvent(eventName, properties) {
+      console.log('Demo Event:', eventName, properties);
+      // Implement your analytics tracking here
+    }
+    
+    // Track page load
+    trackDemoEvent('demo_loaded', {
+      timestamp: new Date().toISOString(),
+      userAgent: navigator.userAgent,
+      viewport: {
+        width: window.innerWidth,
+        height: window.innerHeight
+      }
+    });
+  </script>
+  
+  <!-- Module Script for React App -->
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>
